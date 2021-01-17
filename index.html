@@ -22,7 +22,7 @@
         <br>
         <div class="col-md-12">
           <form id="contact-form">
-            <div class="form-row">
+            <div class="form-row mt-2">
               <div class="form-group col-md-6">
                 <input type="name" class="form-control" name="name" id="name" placeholder="Name">
                 <span class="text-danger d-none font-weight-bold" id="name-validation">Name is required !</span>
@@ -75,7 +75,7 @@
         let valid_email = $('#email_address').val();
         let valid_email_subj = $('#email_subj').val();
         //let valid_message = CKEDITOR.instances.message.getData();
-        let valid_message = $('#message').val();
+        let valid_message = $('#message').summernote('code');;
         let message = "Successfully send the Message.";
         $.confirm({
             title: 'Confirm !!',
@@ -133,7 +133,7 @@ function validateMessageForm(){
   let email = $('#email_address').val();
   let email_subj = $('#email_subj').val();
  // let message = CKEDITOR.instances.message.getData();
-  let message = $('#message').val();
+  let message = $('#message').summernote('code');;
 
   let isValid = false;
 
@@ -196,7 +196,7 @@ function removeValidationMsg(){
 function resetForm(){
   removeValidationMsg();
     $(document).find('#contact-form').trigger("reset");
-    //CKEDITOR.instances.message.setData('');
+    $('#message').summernote('reset');;
 }
 </script>
 </html> 
