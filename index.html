@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-   
 </head> 
 <body> 
     <div class="row">
@@ -21,7 +20,7 @@
         </div>
         <br>
         <div class="col-md-12">
-          <form id="contact-form mt-3">
+          <form id="contact-form mt-4">
             <div class="form-row">
               <div class="form-group col-md-6">
                 <input type="name" class="form-control" name="name" id="name" placeholder="Name">
@@ -63,20 +62,19 @@
   <script type="text/javascript">
     $(document).ready(function(){
       $('#message').summernote({
-      placeholder: 'Hello Bootstrap 4',
+      placeholder: 'Type your message...',
           tabsize: 2,
           height: 100
      });
     //sending message email
     $('#sendMsgBtn').click(function(){
-      let isValidated = validateMessageForm();
-      if(isValidated == true){
+      //let isValidated = validateMessageForm();
+      if(validateMessageForm() == true){
         let valid_name = $('#name').val();
         let valid_email = $('#email_address').val();
         let valid_email_subj = $('#email_subj').val();
-        //let valid_message = CKEDITOR.instances.message.getData();
-        let valid_message = $('#message').summernote('code');;
-        let message = "Successfully send the Message.";
+        let valid_message = $('#message').summernote('code');
+        let message = "Successfully send the Message";
         $.confirm({
             title: 'Confirm !!',
             content: 'Are you sure, you want to send Email ?',
@@ -132,7 +130,6 @@ function validateMessageForm(){
   let name = $('#name').val();
   let email = $('#email_address').val();
   let email_subj = $('#email_subj').val();
- // let message = CKEDITOR.instances.message.getData();
   let message = $('#message').summernote('code');;
 
   let isValid = false;
