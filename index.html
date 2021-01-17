@@ -40,8 +40,8 @@
             <div class="form-row">
               <div class="form-group col-md-12">
                 <textarea type="text" class="form-control" id="message" name="message" row="5" placeholder="Type Your Message"></textarea>
-                <span class="text-danger d-none font-weight-bold" id="message-validation">Message can not be empty !</span>
               </div>
+              <span class="text-danger d-none font-weight-bold" id="message-validation">Message can not be empty !</span>
             </div>
             <div class="text-center mb-2">
               <button type="button" class="btn btn-primary mb-2" id="sendMsgBtn">Send Message</button>
@@ -60,6 +60,11 @@
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
   <script type="text/javascript" src="assets/toastr.min.js"></script>
   <script type="text/javascript">
+     var isSendable = 0;
+     var isNameValid = 0;
+     var isEmailValid = 0;
+     var isEmailSubjectValid = 0;
+     var isMessageValid = 0;
     $(document).ready(function(){
       $('#message').summernote({
       placeholder: 'Type your message...',
@@ -69,7 +74,14 @@
     //sending message email
     $('#sendMsgBtn').click(function(){
       //let isValidated = validateMessageForm();
-      if(validateMessageForm() == true){
+      validateMessageForm();
+      //console.log(validateMessageForm());
+      if(isNameValid == 1 && isEmailValid == 1 && isEmailSubjectValid == 1 && isMessageValid == 1){
+        isSendable = 1;
+      }else{
+        isSendable = 0;
+      }
+      if(isSendable == 1){
         let valid_name = $('#name').val();
         let valid_email = $('#email_address').val();
         let valid_email_subj = $('#email_subj').val();
@@ -132,46 +144,44 @@ function validateMessageForm(){
   let email_subj = $('#email_subj').val();
   let message = $('#message').summernote('code');;
 
-  let isValid = false;
+ 
 
   //validating the input fields
   if(name == ''){
     $('#name-validation').removeClass('d-none').text('Name is required !');
-    isValid = false;
+    isNameValid = 0;
   }else if((name.length)<=2){
     $(document).find('#name-validation').removeClass('d-none').text('Name should be of at least 3 characters !');
-    isValid = false;
+    isNameValid = 0;
   }else{
     $(document).find('#name-validation').addClass('d-none');
-    isValid = true;
+    isNameValid = 1;
   }
 
 
   if(IsEmail(email)==false){
       $('#email-validation').removeClass('d-none');
-      isValid = false;
+      isEmailValid = 0;
     }else{
       $(document).find('#email-validation').addClass('d-none');
-      isValid = true;
+      isEmailValid = 1;
     }
 
-    if(email_subj == ''){
+  if(email_subj == ''){
     $('#subject-validation').removeClass('d-none');
-    isValid = false;
+    isEmailSubjectValid = 0;
   }else{
     $(document).find('#subject-validation').addClass('d-none');
-    isValid = true;
+    isEmailSubjectValid = 1;
   }
 
   if(message == ''){
-    $('#message-validation').removeClass('d-none');
-    isValid = false;
+    $(document).find('#message-validation').removeClass('d-none');
+    isMessageValid = 0;
   }else{
     $(document).find('#message-validation').addClass('d-none');
-    isValid = true;
+    isMessageValid = 1;
   }
-
-  return isValid;
 }
 
 function IsEmail(email) {
