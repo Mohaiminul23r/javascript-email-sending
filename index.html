@@ -67,7 +67,7 @@
      var isMessageValid = 0;
     $(document).ready(function(){
       $('#message').summernote({
-      placeholder: 'Type your message...',
+          placeholder: 'Type your message...',
           tabsize: 2,
           height: 100
      });
@@ -86,7 +86,6 @@
         let valid_email = $('#email_address').val();
         let valid_email_subj = $('#email_subj').val();
         let valid_message = $('#message').summernote('code');
-        let message = "Successfully send the Message";
         $.confirm({
             title: 'Confirm !!',
             content: 'Are you sure, you want to send Email ?',
@@ -142,7 +141,7 @@ function validateMessageForm(){
   let name = $('#name').val();
   let email = $('#email_address').val();
   let email_subj = $('#email_subj').val();
-  let message = $('#message').summernote('code');;
+  let message = $('#message').summernote('code');
 
  
 
@@ -203,7 +202,7 @@ function removeValidationMsg(){
 function resetForm(){
   removeValidationMsg();
     $(document).find('#contact-form').trigger("reset");
-    $('#message').summernote('reset');;
+    $('#message').summernote('reset');
 }
 </script>
 </html> 
